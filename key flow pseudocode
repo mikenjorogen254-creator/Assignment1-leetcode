@@ -1,0 +1,33 @@
+//ADD NEW STUDENT
+function addStudent(student):
+    if student.id in studentRegistry:
+        return "exists"
+    studentRegistry.put(student.id, student)
+    return "added"
+//COURSE ENROLLMENT
+function registerForCourse(studentID, courseID):
+    if not studentRegistry.contains(studentID): return "no student"
+    courseQueue.enqueue(RegistrationRequest(studentID, courseID))
+    processCourseQueue()
+//PROCESS COURSE QUEUE
+while queue not empty:
+    req = queue.dequeue()
+    course = courses.get(req.courseID)
+    if course.currentSize < course.capacity:
+         course.addStudent(req.studentID)
+    else:
+         course.waitlist.add(req.studentID)
+//PAY FEE
+function recordPayment(studentID, amount, transactionID):
+    feeRecord = new FeeRecord(transactionID, studentID, amount, date)
+    feeTree.put(transactionID, feeRecord)
+//BORROW BOOK
+function borrowBook(studentID, isbn):
+    book = books.get(isbn)
+    if book == null or book.availableCopies == 0: return "unavailable"
+    book.availableCopies -= 1
+    borrowStack.push(isbn + ":" + studentID + ":" + date)
+//GET TOP PERFOMANCE
+for each student in registry:
+    pq.add(student.performance)
+topK = extract top k from pq
