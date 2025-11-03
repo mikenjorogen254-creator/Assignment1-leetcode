@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+#include <algorithm>  // for sort()
+#include <iomanip>    // for setprecision
+using namespace std;
+
+struct Food {
+    string name;
+    double rating; // rating out of 10
+};
+
+// Function to display foods
+void displayFoods(Food foods[], int n) {
+    cout << "\n--- 🍽️  Food Ratings ---\n";
+    for (int i = 0; i < n; ++i) {
+        cout << i + 1 << ". " << foods[i].name 
+             << " - Rating: " << fixed << setprecision(1) 
+             << foods[i].rating << "/10" << endl;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter number of food items: ";
+    cin >> n;
+
+    Food foods[n];
+    cout << "\nEnter food names and ratings (out of 10):\n";
+    for (int i = 0; i < n; ++i) {
+        cout << "Food " << i + 1 << " name: ";
+        cin >> ws; // ignore whitespace
+        getline(cin, foods[i].name);
+        cout << "Rating: ";
+        cin >> foods[i].rating;
+    }
+
+    // Sort foods based on rating (descending order)
+    sort(foods, foods + n, [](Food a, Food b) {
+        return a.rating > b.rating;
+    });
+
+    // Display sorted foods
+    displayFoods(foods, n);
+
+    // Calculate average rating
+    double sum = 0;
+    for (int i = 0; i < n; ++i) {
+        sum += foods[i].rating;
+    }
+    double avg = sum / n;
+
+    cout << "\nTop Rated Food: " << foods[0].name 
+         << " 🍛 with a rating of " << foods[0].rating << "/10\n";
+    cout << "Average Rating of all foods: " 
+         << fixed << setprecision(2) << avg << "/10\n";
+
+    cout << "\nThank you for using the Food Rating System! 😊\n";
+
+    return 0;
+}
+ an example outpu after runningEnter number of food items: 4
+
+Enter food names and ratings (out of 10):
+Food 1 name: Smocha
+Rating: 9.5
+Food 2 name: Chips
+Rating: 8.8
+Food 3 name: Cocktail
+Rating: 7.3
+Food 4 name: Chicken fries
+Rating: 8.9
+
+--- 🍽️  Food Ratings ---
+1. Smocha - Rating: 9.5/10
+2. Chicken fries- Rating: 8.9/10
+3. Chips - Rating: 8.8/10
+4. Cocktail - Rating: 7.3/10
+
+Top Rated Food: Pizza 🍛 with a rating of 9.5/10
+Average Rating of all foods: 8.63/10
+
+Thank you for using the Food Rating System
