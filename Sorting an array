@@ -1,0 +1,59 @@
+IN ASCENDING ORDER(SMALL TO LARGE)
+#include <iostream>
+#include <algorithm>  // for sort()
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    int arr[n];
+    cout << "Enter " << n << " integers:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Sort in ascending order
+    sort(arr, arr + n);
+
+    cout << "\nSorted Array (Ascending): ";
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+in Descending order(LARGE-SMALL)
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+
+    int arr[n];
+    cout << "Enter " << n << " integers:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Sort in descending order using a lambda comparator
+    sort(arr, arr + n, [](int a, int b) {
+        return a > b;
+    });
+
+    cout << "\nSorted Array (Descending): ";
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
